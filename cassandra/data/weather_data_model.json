@@ -1,0 +1,1604 @@
+{
+    "modelName": "new_model",
+    "collections": [
+        {
+            "collectionName": "countries",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "id",
+                    "hackoladeMeta": {
+                        "namingConvention": "code"
+                    },
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": true,
+                    "mode": "integer",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "a5748127-53e2-40c1-b3c8-2cdef184404a",
+                    "code": "id",
+                    "compositePartitionKey": true,
+                    "required": true,
+                    "error": {},
+                    "childRelationships": [
+                        "7f8aa5c5-f48c-4db9-ba5f-9a7922398487"
+                    ]
+                },
+                {
+                    "name": "name",
+                    "hackoladeMeta": {
+                        "namingConvention": "code"
+                    },
+                    "isActivated": true,
+                    "primaryKey": true,
+                    "mode": "text",
+                    "subtype": "string",
+                    "childType": "char",
+                    "type": "string",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "9a4d29b9-169b-415a-8f21-7002b0616186",
+                    "error": {},
+                    "compositeClusteringKey": true,
+                    "required": true
+                },
+                {
+                    "name": "subregion",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "primaryKey": false,
+                    "mode": "text",
+                    "subtype": "string",
+                    "childType": "char",
+                    "type": "string",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "fe78eab6-6fa5-43a0-b47b-c991cceecf23",
+                    "error": {}
+                },
+                {
+                    "name": "region",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "primaryKey": false,
+                    "mode": "text",
+                    "subtype": "string",
+                    "childType": "char",
+                    "type": "string",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "2dd616ab-02ed-4bc2-af2a-cb22472ac8d1",
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "86806294-d2c6-4337-b05b-de7c2f90bde5"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "collectionUsers": [],
+            "tableIfNotExist": true,
+            "GUID": "7350b4a5-9be4-4727-a29a-9ef35676df34",
+            "bucketId": "562a6bbf-ce16-4b79-99d5-d2a411a522b3",
+            "compositePartitionKey": [
+                {
+                    "keyId": "a5748127-53e2-40c1-b3c8-2cdef184404a"
+                }
+            ],
+            "compositeClusteringKey": [
+                {
+                    "keyId": "9a4d29b9-169b-415a-8f21-7002b0616186",
+                    "type": "ascending"
+                }
+            ],
+            "tableOptions": {
+                "GUID": "2aa567a4-b4f3-4470-9e0a-20b67c7c139b"
+            }
+        },
+        {
+            "collectionName": "cities",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "city_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "bigint",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "114e02b5-489b-4b15-9303-e2d4d77905c2",
+                    "minimum": 0,
+                    "error": {}
+                },
+                {
+                    "name": "country_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "integer",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "a7a99550-3d9f-49bf-b4b7-dfc716f7a237",
+                    "error": {},
+                    "relationshipType": "Foreign Key",
+                    "foreignCollection": "7350b4a5-9be4-4727-a29a-9ef35676df34",
+                    "foreignField": [
+                        "7350b4a5-9be4-4727-a29a-9ef35676df34",
+                        "a5748127-53e2-40c1-b3c8-2cdef184404a"
+                    ],
+                    "parentRelationship": "7f8aa5c5-f48c-4db9-ba5f-9a7922398487"
+                },
+                {
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "primaryKey": false,
+                    "mode": "text",
+                    "subtype": "string",
+                    "childType": "char",
+                    "type": "string",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "6f41b60f-28eb-41af-9ee9-c3eb7ef03bf6",
+                    "name": "name",
+                    "error": {}
+                },
+                {
+                    "name": "lattitude",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "required": false,
+                    "GUID": "c6d25445-20fc-4b63-a61c-4d1d50cca88b",
+                    "error": {}
+                },
+                {
+                    "name": "longtitude",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "422dbab7-f894-4bc0-9c29-4e611b631271",
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "c106f6d3-7f11-4bdb-b60e-8ff35e535f15"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "collectionUsers": [],
+            "tableIfNotExist": true,
+            "GUID": "69021889-bd58-42cd-aa7b-c44f5208911c",
+            "bucketId": "562a6bbf-ce16-4b79-99d5-d2a411a522b3"
+        },
+        {
+            "collectionName": "realtime_weather",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "city_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": true,
+                    "mode": "bigint",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "20f6c3cc-fa04-4706-9884-7ca32354e931",
+                    "required": true,
+                    "error": {},
+                    "compositePartitionKey": true
+                },
+                {
+                    "name": "year",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "integer",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "583998dd-c806-49fd-9155-9b10a3cb2797",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "month",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "integer",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "94877cf9-7663-4c59-b4d5-388099bc7602",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "day",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "integer",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "6a960a3d-5f02-472b-80ef-18c1a92d4701",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "time",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "primaryKey": false,
+                    "childType": "time",
+                    "type": "string",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "101d0186-f75f-4d14-9ca8-fe7b5b251691",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "main",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "primaryKey": false,
+                    "mode": "text",
+                    "subtype": "string",
+                    "childType": "char",
+                    "type": "string",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "e1f424ae-60f9-4307-bb0b-822c61ae98bc",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "description",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "primaryKey": false,
+                    "mode": "text",
+                    "subtype": "string",
+                    "childType": "char",
+                    "type": "string",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "5df54f65-fa6c-4f2d-9f5c-9a0c272ec912",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "temp",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "0b86fc93-ce52-4824-a50c-0a47b337bf04",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "feels_like",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "f884b699-6d83-4b09-a0e2-fecd808f7957",
+                    "required": false,
+                    "error": {}
+                },
+                {
+                    "name": "temp_min",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "4a4d1aba-8590-49c2-96e8-5bb70d276960",
+                    "required": false,
+                    "error": {}
+                },
+                {
+                    "name": "temp_max",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "ef083b76-501d-4efb-902b-b67e851de525",
+                    "error": {}
+                },
+                {
+                    "name": "pressure",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "c57dfe5e-0b62-4370-a911-8c14dc79a85d",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "humidity",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "decimal",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "ea103079-bc05-4655-b831-e5ce4b70caf5",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "sea_level",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "d9a024c5-2208-413c-96b4-e7afb40cafa8",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "grnd_level",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "320d9e23-2d2a-483d-aa5c-d292c48df7ec",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "visibility",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "integer",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "1edfe09b-02b2-40e2-8021-5571a8b529bb",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "wind",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "subtype": "map<num>",
+                    "keyType": "char",
+                    "keySubtype": "text",
+                    "primaryKey": false,
+                    "properties": [
+                        {
+                            "name": "speed",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "exclusiveMinimum": false,
+                            "exclusiveMaximum": false,
+                            "primaryKey": false,
+                            "mode": "double",
+                            "childType": "numeric",
+                            "type": "numeric",
+                            "compositeKey": [
+                                "compositePartitionKey",
+                                "compositeClusteringKey"
+                            ],
+                            "GUID": "894d9f29-861a-40b5-b9f5-8c97bfb08ccc",
+                            "required": true,
+                            "error": {}
+                        },
+                        {
+                            "name": "deg",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "exclusiveMinimum": false,
+                            "exclusiveMaximum": false,
+                            "primaryKey": false,
+                            "mode": "integer",
+                            "childType": "numeric",
+                            "type": "numeric",
+                            "compositeKey": [
+                                "compositePartitionKey",
+                                "compositeClusteringKey"
+                            ],
+                            "GUID": "f0e85abe-a0fb-4020-a9a4-4e4b2bfe4cc5",
+                            "required": true,
+                            "error": {}
+                        },
+                        {
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "exclusiveMinimum": false,
+                            "exclusiveMaximum": false,
+                            "primaryKey": false,
+                            "mode": "double",
+                            "childType": "numeric",
+                            "type": "numeric",
+                            "compositeKey": [
+                                "compositePartitionKey",
+                                "compositeClusteringKey"
+                            ],
+                            "GUID": "de55f5f2-1857-4eef-abb8-65de4149f312",
+                            "required": true,
+                            "name": "gust",
+                            "error": {}
+                        }
+                    ],
+                    "additionalProperties": false,
+                    "childType": "map",
+                    "type": "document",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "bb9e7a29-badc-40ab-bcf1-84ac96c4c569",
+                    "frozen": false,
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "precipitation",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "subtype": "map<num>",
+                    "keyType": "char",
+                    "keySubtype": "text",
+                    "primaryKey": false,
+                    "properties": [
+                        {
+                            "name": "rain",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "exclusiveMinimum": false,
+                            "exclusiveMaximum": false,
+                            "primaryKey": false,
+                            "mode": "double",
+                            "childType": "numeric",
+                            "type": "numeric",
+                            "compositeKey": [
+                                "compositePartitionKey",
+                                "compositeClusteringKey"
+                            ],
+                            "GUID": "27cb3dec-a7a7-4000-b6d5-9dd31867b888",
+                            "error": {}
+                        },
+                        {
+                            "name": "snow",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "exclusiveMinimum": false,
+                            "exclusiveMaximum": false,
+                            "primaryKey": false,
+                            "mode": "double",
+                            "childType": "numeric",
+                            "type": "numeric",
+                            "compositeKey": [
+                                "compositePartitionKey",
+                                "compositeClusteringKey"
+                            ],
+                            "GUID": "c413fae3-702f-4a4d-8665-77c0680e2b7e",
+                            "error": {}
+                        }
+                    ],
+                    "additionalProperties": false,
+                    "childType": "map",
+                    "type": "document",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "7c1069fb-0471-4c9d-8903-60c35cce8171",
+                    "error": {}
+                },
+                {
+                    "name": "clouds",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "integer",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "58281468-ca33-4f0e-91fc-0707508042e1",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "sunrise",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "primaryKey": false,
+                    "childType": "time",
+                    "type": "string",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "606778e2-acc3-4278-a5a6-5ec24ac76eb6",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "sunset",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "primaryKey": false,
+                    "childType": "time",
+                    "type": "string",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "5fff1bf6-5d8c-4128-94af-9765ae65408c",
+                    "required": true,
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "842e1e4c-7324-43cf-b4bc-8971e5e0590a"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "collectionUsers": [],
+            "tableIfNotExist": true,
+            "GUID": "37449752-9ccf-4212-a68b-6c4addee7b37",
+            "bucketId": "562a6bbf-ce16-4b79-99d5-d2a411a522b3",
+            "hackoladeMeta": {},
+            "compositePartitionKey": [
+                {
+                    "keyId": "20f6c3cc-fa04-4706-9884-7ca32354e931"
+                }
+            ]
+        },
+        {
+            "collectionName": "daily_aggregate",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "city_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": true,
+                    "mode": "bigint",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "5a65e17d-3243-4faf-aa87-970fe10af206",
+                    "error": {},
+                    "compositePartitionKey": true,
+                    "required": true
+                },
+                {
+                    "name": "year",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": true,
+                    "mode": "integer",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "error": {},
+                    "GUID": "89a934fe-90d9-4e7e-a5e7-9548264e2635",
+                    "compositeClusteringKey": true,
+                    "required": true
+                },
+                {
+                    "name": "month",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "integer",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "error": {},
+                    "GUID": "fbc94aa2-2e2f-4582-936b-371f8008546b",
+                    "required": false
+                },
+                {
+                    "name": "day",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "integer",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "error": {},
+                    "GUID": "486058a9-66e7-41e0-a2e2-c6d95fe9e758",
+                    "required": false
+                },
+                {
+                    "name": "sum_precipitation",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "52d442ee-4630-4321-9a68-45b470c3eef8",
+                    "required": false,
+                    "error": {}
+                },
+                {
+                    "name": "avg_pressure",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "447df546-6c44-4bd1-91b1-6858cc66ad03",
+                    "error": {}
+                },
+                {
+                    "name": "avg_temp",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "59dbb874-166f-492c-969b-48e20a12dd59",
+                    "error": {}
+                },
+                {
+                    "name": "temp_min",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "6d6ef9a0-033e-45a1-9f92-0db1bd34fae6",
+                    "error": {}
+                },
+                {
+                    "name": "temp_max",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "32033f54-4189-4f84-9cd8-8361e9d2d798",
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "b79847ca-8031-457b-9543-04f96beacb35"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "collectionUsers": [],
+            "tableIfNotExist": true,
+            "GUID": "52c9c8f1-f040-410d-a550-7e58e3a1e76b",
+            "bucketId": "562a6bbf-ce16-4b79-99d5-d2a411a522b3",
+            "compositePartitionKey": [
+                {
+                    "keyId": "5a65e17d-3243-4faf-aa87-970fe10af206"
+                }
+            ],
+            "compositeClusteringKey": [
+                {
+                    "keyId": "89a934fe-90d9-4e7e-a5e7-9548264e2635",
+                    "type": "ascending"
+                }
+            ],
+            "autoHeight": true,
+            "autoWidth": true,
+            "fontStyle": [
+                "bold"
+            ]
+        },
+        {
+            "collectionName": "monthly_cumulative_aggregate",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "city_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "bigint",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "required": true,
+                    "GUID": "c43a006e-dd59-48ae-8014-fc7de874689e",
+                    "error": {}
+                },
+                {
+                    "name": "year",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "integer",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "compositePartitionKey": false,
+                    "compositeClusteringKey": false,
+                    "error": {},
+                    "required": true,
+                    "GUID": "8265c21d-28f2-4c8b-a407-85c29e898634"
+                },
+                {
+                    "name": "month",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "integer",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "75ba3fc5-d4ce-4f39-a686-e31f1baf3bcc",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "sum_precipitation",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "26095083-c7aa-477d-8b8b-825cfcaef833",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "avg_pressure",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "required": true,
+                    "GUID": "a322eb91-2e27-414a-84b5-651a7bcd0783",
+                    "error": {}
+                },
+                {
+                    "name": "avg_temp",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "required": true,
+                    "GUID": "76d31d12-28dc-417c-85e5-de68ad0b1124",
+                    "error": {}
+                },
+                {
+                    "name": "temp_min",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "4c09e6f0-29e8-4280-8196-c7123a3e7bf9",
+                    "required": true,
+                    "error": {}
+                },
+                {
+                    "name": "temp_max",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "required": true,
+                    "GUID": "c26a0ecb-9488-43fe-9ba4-f7b3de92195e",
+                    "error": {}
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "7069563f-e5e1-49e5-b2e4-0c5a6465b567"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "collectionUsers": [],
+            "tableIfNotExist": false,
+            "searchIndexIfNotExist": false,
+            "GUID": "1f7b09d4-b88a-45a2-9f04-4398332b85c8",
+            "bucketId": "562a6bbf-ce16-4b79-99d5-d2a411a522b3"
+        },
+        {
+            "collectionName": "yearly_cumulative_aggregate",
+            "type": "object",
+            "properties": [
+                {
+                    "name": "city_id",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "bigint",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "required": true,
+                    "GUID": "1274a459-63bd-42bc-a319-6b34f96bf572",
+                    "error": {},
+                    "foreignCollection": "",
+                    "foreignField": []
+                },
+                {
+                    "name": "year",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "integer",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "compositePartitionKey": false,
+                    "compositeClusteringKey": false,
+                    "error": {},
+                    "required": true,
+                    "GUID": "88b279a0-b8e4-4e88-b0db-15ea6c8c76f4",
+                    "foreignCollection": "",
+                    "foreignField": []
+                },
+                {
+                    "name": "sum_precipitation",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "d1e28b52-10bc-449b-a518-e0800f8004f2",
+                    "required": true,
+                    "error": {},
+                    "foreignCollection": "",
+                    "foreignField": []
+                },
+                {
+                    "name": "avg_pressure",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "required": true,
+                    "GUID": "025b6dea-6f7c-4d31-82a5-60647d5b2466",
+                    "error": {},
+                    "foreignCollection": "",
+                    "foreignField": []
+                },
+                {
+                    "name": "avg_temp",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "required": true,
+                    "GUID": "91471426-6b2b-457e-b55f-ce6327f3037c",
+                    "error": {},
+                    "foreignCollection": "",
+                    "foreignField": []
+                },
+                {
+                    "name": "temp_min",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "GUID": "5851000c-37f4-4d1a-b025-d08b13ee1e8e",
+                    "required": true,
+                    "error": {},
+                    "foreignCollection": "",
+                    "foreignField": []
+                },
+                {
+                    "name": "temp_max",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "exclusiveMinimum": false,
+                    "exclusiveMaximum": false,
+                    "primaryKey": false,
+                    "mode": "double",
+                    "childType": "numeric",
+                    "type": "numeric",
+                    "compositeKey": [
+                        "compositePartitionKey",
+                        "compositeClusteringKey"
+                    ],
+                    "required": true,
+                    "GUID": "20ec0e56-e48d-4d74-828a-ffb7b4742a6f",
+                    "error": {},
+                    "foreignCollection": "",
+                    "foreignField": []
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "f93694b1-343d-42af-989b-6efea8b5ce41"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "collectionUsers": [],
+            "tableIfNotExist": false,
+            "searchIndexIfNotExist": false,
+            "GUID": "5fa74459-f80e-4711-9e97-6b72ff72385c",
+            "bucketId": "562a6bbf-ce16-4b79-99d5-d2a411a522b3",
+            "hackoladeMeta": {}
+        }
+    ],
+    "buckets": [
+        {
+            "name": "weather",
+            "type": "bucket",
+            "collectionIds": [
+                "7350b4a5-9be4-4727-a29a-9ef35676df34",
+                "69021889-bd58-42cd-aa7b-c44f5208911c",
+                "37449752-9ccf-4212-a68b-6c4addee7b37",
+                "52c9c8f1-f040-410d-a550-7e58e3a1e76b",
+                "1f7b09d4-b88a-45a2-9f04-4398332b85c8",
+                "5fa74459-f80e-4711-9e97-6b72ff72385c"
+            ],
+            "backgroundColor": {
+                "r": 216,
+                "g": 0,
+                "b": 115,
+                "a": 1
+            },
+            "show": true,
+            "isActivated": true,
+            "indexes": [],
+            "replStrategy": "SimpleStrategy",
+            "addToCqlScript": true,
+            "keyspaceIfNotExist": true,
+            "GUID": "562a6bbf-ce16-4b79-99d5-d2a411a522b3",
+            "hackoladeMeta": {},
+            "replFactor": 3,
+            "durableWrites": false
+        }
+    ],
+    "views": [],
+    "relationships": [
+        {
+            "name": "fk_countries_id_to_cities_country_id",
+            "relationshipType": "Foreign Key",
+            "parentField": [
+                [
+                    "7350b4a5-9be4-4727-a29a-9ef35676df34",
+                    "a5748127-53e2-40c1-b3c8-2cdef184404a"
+                ]
+            ],
+            "parentCardinality": "1",
+            "childField": [
+                [
+                    "69021889-bd58-42cd-aa7b-c44f5208911c",
+                    "a7a99550-3d9f-49bf-b4b7-dfc716f7a237"
+                ]
+            ],
+            "isActivated": true,
+            "childCardinality": "0..n",
+            "parentCollection": "7350b4a5-9be4-4727-a29a-9ef35676df34",
+            "childCollection": "69021889-bd58-42cd-aa7b-c44f5208911c",
+            "GUID": "7f8aa5c5-f48c-4db9-ba5f-9a7922398487",
+            "hackoladeStyles": {
+                "GUID": "09dfcab7-d177-4765-b7e9-d3de5dedbbc2",
+                "autoPositioning": true,
+                "type": "Orthogonal",
+                "thickness": 2,
+                "color": "#79c4ff",
+                "dataType": "",
+                "shape": [
+                    {
+                        "x": 1627,
+                        "y": 861.5
+                    },
+                    {
+                        "x": 1587.5,
+                        "y": 861.5
+                    },
+                    {
+                        "x": 1587.5,
+                        "y": 850.5
+                    },
+                    {
+                        "x": 1548,
+                        "y": 850.5
+                    }
+                ],
+                "sides": [
+                    "left",
+                    "right"
+                ]
+            }
+        }
+    ],
+    "users": [],
+    "diagramViews": [
+        {
+            "GUID": "5f1c8f13-ed59-452a-90df-dac036cfb3e8",
+            "name": "New Diagram View",
+            "buckets": [
+                "562a6bbf-ce16-4b79-99d5-d2a411a522b3"
+            ],
+            "comments": "",
+            "description": "",
+            "entities": [
+                "69021889-bd58-42cd-aa7b-c44f5208911c",
+                "7350b4a5-9be4-4727-a29a-9ef35676df34",
+                "37449752-9ccf-4212-a68b-6c4addee7b37"
+            ]
+        }
+    ],
+    "idToNameHashTable": {
+        "562a6bbf-ce16-4b79-99d5-d2a411a522b3": "weather",
+        "7350b4a5-9be4-4727-a29a-9ef35676df34": "countries",
+        "a5748127-53e2-40c1-b3c8-2cdef184404a": "id",
+        "9a4d29b9-169b-415a-8f21-7002b0616186": "name",
+        "fe78eab6-6fa5-43a0-b47b-c991cceecf23": "subregion",
+        "2dd616ab-02ed-4bc2-af2a-cb22472ac8d1": "region",
+        "69021889-bd58-42cd-aa7b-c44f5208911c": "cities",
+        "114e02b5-489b-4b15-9303-e2d4d77905c2": "city_id",
+        "a7a99550-3d9f-49bf-b4b7-dfc716f7a237": "country_id",
+        "6f41b60f-28eb-41af-9ee9-c3eb7ef03bf6": "name",
+        "c6d25445-20fc-4b63-a61c-4d1d50cca88b": "lattitude",
+        "7f8aa5c5-f48c-4db9-ba5f-9a7922398487": "fk_countries_id_to_cities_country_id",
+        "422dbab7-f894-4bc0-9c29-4e611b631271": "longtitude",
+        "37449752-9ccf-4212-a68b-6c4addee7b37": "realtime_weather",
+        "20f6c3cc-fa04-4706-9884-7ca32354e931": "city_id",
+        "583998dd-c806-49fd-9155-9b10a3cb2797": "year",
+        "94877cf9-7663-4c59-b4d5-388099bc7602": "month",
+        "5f1c8f13-ed59-452a-90df-dac036cfb3e8": "New Diagram View",
+        "6a960a3d-5f02-472b-80ef-18c1a92d4701": "day",
+        "101d0186-f75f-4d14-9ca8-fe7b5b251691": "time",
+        "e1f424ae-60f9-4307-bb0b-822c61ae98bc": "main",
+        "5df54f65-fa6c-4f2d-9f5c-9a0c272ec912": "description",
+        "0b86fc93-ce52-4824-a50c-0a47b337bf04": "temp",
+        "f884b699-6d83-4b09-a0e2-fecd808f7957": "feels_like",
+        "4a4d1aba-8590-49c2-96e8-5bb70d276960": "temp_min",
+        "ef083b76-501d-4efb-902b-b67e851de525": "temp_max",
+        "c57dfe5e-0b62-4370-a911-8c14dc79a85d": "pressure",
+        "ea103079-bc05-4655-b831-e5ce4b70caf5": "humidity",
+        "d9a024c5-2208-413c-96b4-e7afb40cafa8": "sea_level",
+        "320d9e23-2d2a-483d-aa5c-d292c48df7ec": "grnd_level",
+        "1edfe09b-02b2-40e2-8021-5571a8b529bb": "visibility",
+        "bb9e7a29-badc-40ab-bcf1-84ac96c4c569": "wind",
+        "894d9f29-861a-40b5-b9f5-8c97bfb08ccc": "speed",
+        "f0e85abe-a0fb-4020-a9a4-4e4b2bfe4cc5": "deg",
+        "de55f5f2-1857-4eef-abb8-65de4149f312": "gust",
+        "7c1069fb-0471-4c9d-8903-60c35cce8171": "precipitation",
+        "27cb3dec-a7a7-4000-b6d5-9dd31867b888": "rain",
+        "c413fae3-702f-4a4d-8665-77c0680e2b7e": "snow",
+        "58281468-ca33-4f0e-91fc-0707508042e1": "clouds",
+        "606778e2-acc3-4278-a5a6-5ec24ac76eb6": "sunrise",
+        "5fff1bf6-5d8c-4128-94af-9765ae65408c": "sunset",
+        "52c9c8f1-f040-410d-a550-7e58e3a1e76b": "daily_aggregate",
+        "5a65e17d-3243-4faf-aa87-970fe10af206": "city_id",
+        "89a934fe-90d9-4e7e-a5e7-9548264e2635": "year",
+        "fbc94aa2-2e2f-4582-936b-371f8008546b": "month",
+        "486058a9-66e7-41e0-a2e2-c6d95fe9e758": "day",
+        "52d442ee-4630-4321-9a68-45b470c3eef8": "sum_precipitation",
+        "447df546-6c44-4bd1-91b1-6858cc66ad03": "avg_pressure",
+        "59dbb874-166f-492c-969b-48e20a12dd59": "avg_temp",
+        "6d6ef9a0-033e-45a1-9f92-0db1bd34fae6": "temp_min",
+        "32033f54-4189-4f84-9cd8-8361e9d2d798": "temp_max",
+        "1f7b09d4-b88a-45a2-9f04-4398332b85c8": "monthly_cumulative_aggregate",
+        "c43a006e-dd59-48ae-8014-fc7de874689e": "city_id",
+        "8265c21d-28f2-4c8b-a407-85c29e898634": "year",
+        "75ba3fc5-d4ce-4f39-a686-e31f1baf3bcc": "month",
+        "26095083-c7aa-477d-8b8b-825cfcaef833": "sum_precipitation",
+        "a322eb91-2e27-414a-84b5-651a7bcd0783": "avg_pressure",
+        "76d31d12-28dc-417c-85e5-de68ad0b1124": "avg_temp",
+        "4c09e6f0-29e8-4280-8196-c7123a3e7bf9": "temp_min",
+        "c26a0ecb-9488-43fe-9ba4-f7b3de92195e": "temp_max",
+        "1274a459-63bd-42bc-a319-6b34f96bf572": "city_id",
+        "88b279a0-b8e4-4e88-b0db-15ea6c8c76f4": "year",
+        "d1e28b52-10bc-449b-a518-e0800f8004f2": "sum_precipitation",
+        "025b6dea-6f7c-4d31-82a5-60647d5b2466": "avg_pressure",
+        "91471426-6b2b-457e-b55f-ce6327f3037c": "avg_temp",
+        "5851000c-37f4-4d1a-b025-d08b13ee1e8e": "temp_min",
+        "20ec0e56-e48d-4d74-828a-ffb7b4742a6f": "temp_max",
+        "5fa74459-f80e-4711-9e97-6b72ff72385c": "yearly_cumulative_aggregate"
+    },
+    "definitions": {
+        "type": "definitions",
+        "properties": [],
+        "GUID": "1d93f947-86a8-495d-b6cd-62f37691565d"
+    },
+    "polyglotDefinitions": {
+        "type": "polyglotDefinitions",
+        "properties": [],
+        "GUID": "d1829060-63ff-4447-ae57-914e39709558"
+    },
+    "externalDefinitions": {
+        "type": "externalDefinitions",
+        "properties": [],
+        "GUID": "c000f9f0-d73b-4158-b059-1cee9c7dd7bb"
+    },
+    "sources": [],
+    "decorativeSymbols": [],
+    "dbVersion": "5.x",
+    "dbVendor": "Cassandra",
+    "appTarget": "CASSANDRA",
+    "creationTS": "2024-11-02T02:27:31.281Z",
+    "GUID": "8280b35e-fae8-418e-a7ed-6a48dd88e34f",
+    "isLineageEnabled": false,
+    "lastModifTS": "2024-11-10T15:00:51.377Z",
+    "persistenceSchemaVersion": "7",
+    "isCreatedByPlugin": true,
+    "pluginInformation": {
+        "pluginName": "Cassandra",
+        "pluginVersion": "0.2.8",
+        "pluginEngineVersion": "1.0.0"
+    },
+    "applicationInformation": {
+        "version": "7.8.3"
+    },
+    "hackoladeMeta": {},
+    "settings": {
+        "centralPane": {
+            "dbLevel": {
+                "erd": [
+                    {
+                        "GUID": "7350b4a5-9be4-4727-a29a-9ef35676df34",
+                        "x": 1275,
+                        "y": 798,
+                        "width": 273,
+                        "height": 105,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "69021889-bd58-42cd-aa7b-c44f5208911c",
+                        "x": 1627,
+                        "y": 800,
+                        "width": 201,
+                        "height": 123,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "37449752-9ccf-4212-a68b-6c4addee7b37",
+                        "x": 1277,
+                        "y": 957,
+                        "width": 293,
+                        "height": 501,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "52c9c8f1-f040-410d-a550-7e58e3a1e76b",
+                        "x": 1630,
+                        "y": 959,
+                        "width": 314,
+                        "height": 195,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "1f7b09d4-b88a-45a2-9f04-4398332b85c8",
+                        "x": 1631,
+                        "y": 1163,
+                        "width": 296,
+                        "height": 177,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "5fa74459-f80e-4711-9e97-6b72ff72385c",
+                        "x": 1638,
+                        "y": 1354,
+                        "width": 283,
+                        "height": 159,
+                        "color": {}
+                    }
+                ],
+                "erdDefinitions": {
+                    "erd": [],
+                    "rootPath": [],
+                    "entities": [],
+                    "decorativeSymbols": []
+                },
+                "buckets": [
+                    {
+                        "x": 1235,
+                        "y": 758,
+                        "GUID": "562a6bbf-ce16-4b79-99d5-d2a411a522b3"
+                    }
+                ],
+                "collapsedNodes": [],
+                "activeRelationship": "",
+                "activeRelationshipFields": {
+                    "childField": [],
+                    "parentField": []
+                },
+                "selectedCollections": [],
+                "displayColorPicker": false,
+                "graphView": {
+                    "erd": [],
+                    "buckets": [],
+                    "decorativeSymbols": [],
+                    "forceLayout": true,
+                    "defaultLinkLength": 300
+                },
+                "diagramViews": [
+                    {
+                        "GUID": "5f1c8f13-ed59-452a-90df-dac036cfb3e8",
+                        "entities": [
+                            {
+                                "GUID": "69021889-bd58-42cd-aa7b-c44f5208911c",
+                                "x": 1085.5,
+                                "y": 1339.0000009536743,
+                                "width": 202,
+                                "height": 123,
+                                "color": {}
+                            },
+                            {
+                                "GUID": "7350b4a5-9be4-4727-a29a-9ef35676df34",
+                                "x": 1050,
+                                "y": 1197.0000009536743,
+                                "width": 265,
+                                "height": 102,
+                                "color": {}
+                            },
+                            {
+                                "GUID": "37449752-9ccf-4212-a68b-6c4addee7b37",
+                                "x": 1050,
+                                "y": 1050,
+                                "width": 294,
+                                "height": 501,
+                                "color": {}
+                            }
+                        ],
+                        "buckets": [
+                            {
+                                "x": 1000,
+                                "y": 1000,
+                                "GUID": "562a6bbf-ce16-4b79-99d5-d2a411a522b3"
+                            }
+                        ],
+                        "graphView": {
+                            "erd": [],
+                            "buckets": [],
+                            "decorativeSymbols": [],
+                            "forceLayout": true,
+                            "defaultLinkLength": 300
+                        },
+                        "displayOptions": {},
+                        "relationships": [
+                            {
+                                "GUID": "7f8aa5c5-f48c-4db9-ba5f-9a7922398487",
+                                "autoPositioning": true,
+                                "sides": [
+                                    "right",
+                                    "right"
+                                ],
+                                "shape": [
+                                    {
+                                        "x": 1279.5,
+                                        "y": 1398.5000009536743
+                                    },
+                                    {
+                                        "x": 1340,
+                                        "y": 1398.5000009536743
+                                    },
+                                    {
+                                        "x": 1340,
+                                        "y": 1248.0000009536743
+                                    },
+                                    {
+                                        "x": 1315,
+                                        "y": 1248.0000009536743
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "decorativeSymbols": [],
+                "nestedCollectionsLayout": "horizontal",
+                "options": [
+                    {
+                        "GUID": "5fa74459-f80e-4711-9e97-6b72ff72385c"
+                    }
+                ],
+                "relationshipUpdateDisabled": false
+            },
+            "collectionLevel": {},
+            "changed": false
+        },
+        "dtDiagram": {
+            "collapsedNodes": [],
+            "shouldDistributeCollections": false
+        }
+    }
+}
