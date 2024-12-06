@@ -1,3 +1,5 @@
-apache-airflow
-mysql-connector-python
 cassandra-driver
+pyspark
+pandas
+numpy
+requests
