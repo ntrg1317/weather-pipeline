@@ -49,8 +49,8 @@ x-airflow-common:
   # In order to add custom dependencies or upgrade provider packages you can use your extended image.
   # Comment the image line, place your Dockerfile in the directory where you placed the docker-compose.yaml
   # and uncomment the "build" line below, Then run `docker-compose build` to build the images.
-  image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.10.2-python3.8}
-  # build: .
+#  image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.10.2-python3.8}
+  build: .
   environment:
     &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: CeleryExecutor
@@ -79,6 +79,8 @@ x-airflow-common:
     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
     - ${AIRFLOW_PROJ_DIR:-.}/data:/opt/airflow/data
     - ${AIRFLOW_PROJ_DIR:-.}/requirements.txt:/opt/airflow/requirements.txt
+    - ${AIRFLOW_PROJ_DIR:-.}/spark/apps:/opt/spark/apps
+    - ${AIRFLOW_PROJ_DIR:-.}/spark/data:/opt/spark/data
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on
@@ -261,87 +263,86 @@ services:
       - bash
       - -c
       - airflow
-#  cassandra:
-#    image: bitnami/cassandra:latest
-#    hostname: cassandra
+
+#  spark-master:
+#    image: cluster-apache-spark:3.0.2
 #    ports:
-#      - "9042:9042"
+#      - "9090:8080"
+#      - "7077:7077"
+#    volumes:
+#      - ./spark/apps:/usr/local/spark/apps
+#      - ./spark/data:/usr/local/spark/data
+#    environment:
+#      - SPARK_LOCAL_IP=spark-master
+#      - SPARK_WORKLOAD=master
+#  spark-worker-a:
+#    image: cluster-apache-spark:3.0.2
+#    ports:
+#      - "9091:8080"
 #      - "7000:7000"
-#    volumes:
-#      - ./cassandra/scripts:/bitnami/scripts
-#      - ./cassandra/scripts/data:/bitnami/data
-#    environment:
-#      CASSANDRA_USERNAME: cassandra
-#      CASSANDRA_PASSWORD: cassandra
-  #  cassandra:
-#    image: cassandra:latest
-#    hostname: cassandra
-#    ports:
-#      - "9042:9042"
-#    volumes:
-#      - cassandra-data:/var/lib/cassandra
-#      - ./cassandra/scripts:/scripts
-#      - ./cassandra/scripts/data:/data
-#    environment:
-#      - MAX_HEAP_SIZE=2G
-#      - HEAP_NEWSIZE=200M
-#      - CASSANDRA_USERNAME=cassandra
-#      - CASSANDRA_PASSWORD=cassandra
-#      - CASSANDRA_CLUSTER_NAME=weather_cluster
-#    healthcheck:
-#      test: [ "CMD-SHELL", "echo 'SELECT release_version FROM system.local;' | cqlsh -u cassandra -p cassandra" ]
-#      interval: 10s
-#      timeout: 10s
-#      retries: 5
-##
-#  cassandra:
-#    image: cassandra:latest
-#    hostname: cassandra
-#    ports:
-#      - "9042:9042"
-#    volumes:
-#      - cassandra-data:/var/lib/cassandra
-#      - ./cassandra/scripts:/scripts
-#      - ./cassandra/scripts/data:/data
-#    environment:
-#      - CASSANDRA_CLUSTER_NAME=weather_cluster
-#      - CASSANDRA_ENDPOINT_SNITCH=SimpleSnitch
-#      - CASSANDRA_DC=datacenter1
-#      - CASSANDRA_USERNAME=cassandra
-#      - CASSANDRA_PASSWORD=cassandra
-#      - MAX_HEAP_SIZE=2G
-#      - HEAP_NEWSIZE=400M
-#    healthcheck:
-#      test: [ "CMD-SHELL", "[ $$(nodetool statusgossip) = running ]" ]
-#      interval: 30s
-#      timeout: 10s
-#      retries: 5
-#    restart: always
-
-#  cassandra-init:
-#    image: cassandra:latest
-#    volumes:
-#      - ./cassandra/scripts:/scripts
-#      - ./cassandra/scripts/data:/data
 #    depends_on:
-#      cassandra:
-#        condition: service_healthy
-#    command: /bin/bash -c "sleep 30 && cqlsh cassandra -f /scripts/create-keyspace.cql && cqlsh cassandra -f /scripts/load-countries-cities.cql"
-
-#  grafana:
-#    image: grafana/grafana:10.1.2
-#    ports:
-#      - "3000:3000"
+#      - spark-master
 #    environment:
-#      GF_LOG_LEVEL: debug
-#      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
-#      GF_AUTH_ANONYMOUS_ENABLED: "true"
-#      GF_AUTH_BASIC_ENABLED: "false"
-#      GF_DEFAULT_APP_MODE: development
-#      GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: hadesarchitect-cassandra-datasource
+#      - SPARK_MASTER=spark://spark-master:7077
+#      - SPARK_WORKER_CORES=1
+#      - SPARK_WORKER_MEMORY=1G
+#      - SPARK_DRIVER_MEMORY=1G
+#      - SPARK_EXECUTOR_MEMORY=1G
+#      - SPARK_WORKLOAD=worker
+#      - SPARK_LOCAL_IP=spark-worker-a
 #    volumes:
-#      - /var/lib/grafana
-#      - ./dist/secure-connect-weather-cluster:/var/lib/grafana/
+#      - ./spark/apps:/opt/spark-apps
+#      - ./spark/data:/opt/spark-data
+#  spark-worker-b:
+#    image: cluster-apache-spark:3.0.2
+#    ports:
+#      - "9092:8080"
+#      - "7001:7000"
+#    depends_on:
+#      - spark-master
+#    environment:
+#      - SPARK_MASTER=spark://spark-master:7077
+#      - SPARK_WORKER_CORES=1
+#      - SPARK_WORKER_MEMORY=1G
+#      - SPARK_DRIVER_MEMORY=1G
+#      - SPARK_EXECUTOR_MEMORY=1G
+#      - SPARK_WORKLOAD=worker
+#      - SPARK_LOCAL_IP=spark-worker-b
+#    volumes:
+#      - ./spark/apps:/usr/local/spark/apps
+#      - ./spark/data:/usr/local/spark/data
+
+  spark-master:
+    image: bitnami/spark:3.4.1
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    ports:
+      - "8081:8080"
+      - "7077:7077"
+    volumes:
+      - ./spark/apps:/opt/spark/apps
+      - ./spark/data:/opt/spark/data
+
+  spark-worker:
+    image: bitnami/spark:3.4.1
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_MEMORY=2g
+      - SPARK_WORKER_CORES=2
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    volumes:
+      - ./spark/apps:/opt/spark/apps
+      - ./spark/data:/opt/spark/data
+    depends_on:
+      - spark-master
 volumes:
   postgres-db-volume:
   cassandra-data:

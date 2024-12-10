@@ -1,2 +1,3 @@
 from .apiKeyManager import ApiKeyManager
 from .cassandraDatabase import CassandraDatabase
+from .create_spark_object import SparkCassandraConnector

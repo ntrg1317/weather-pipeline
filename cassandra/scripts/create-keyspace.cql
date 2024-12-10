@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS "weather"."cities" (
 
 CREATE TABLE IF NOT EXISTS "weather"."realtime_weather" (
   "city" text,
-  "datetime" int,
+  "datetime" timestamp,
   "main" text,
   "description" text,
   "temp" double,
@@ -42,15 +42,15 @@ CREATE TABLE IF NOT EXISTS "weather"."realtime_weather" (
   "wind" frozen<wind>,
   "precipitation" frozen<precipitation>,
   "clouds" int,
-  "sunrise" int,
-  "sunset" int,
+  "sunrise" timestamp,
+  "sunset" timestamp,
   PRIMARY KEY ("city", "datetime")
 )
 WITH CLUSTERING ORDER BY ("datetime" DESC);
 
 CREATE TABLE IF NOT EXISTS "weather"."daily_precipitation_aggregate" (
   "city" text,
-  "datetime" int,
+  "datetime" timestamp,
   "sum_precipitation" counter,
   PRIMARY KEY ("city", "datetime")
 )
@@ -58,7 +58,7 @@ WITH CLUSTERING ORDER BY ("datetime" DESC);
 
 CREATE TABLE IF NOT EXISTS "weather"."daily_aggregate" (
   "city" text,
-  "datetime" int,
+  "datetime" timestamp,
   "avg_pressure" double,
   "avg_temp" double,
   "temp_min" double,
@@ -69,7 +69,7 @@ WITH CLUSTERING ORDER BY ("datetime" DESC);
 
 CREATE TABLE IF NOT EXISTS "weather"."monthly_precipitation_aggregate" (
   "city" text,
-  "datetime" int,
+  "datetime" timestamp,
   "sum_precipitation" counter,
   PRIMARY KEY ("city", "datetime")
 )
@@ -77,7 +77,7 @@ WITH CLUSTERING ORDER BY ("datetime" DESC);
 
 CREATE TABLE IF NOT EXISTS "weather"."monthly_aggregate" (
   "city" text,
-  "datetime" int,
+  "datetime" timestamp,
   "avg_pressure" double,
   "avg_temp" double,
   "temp_min" double,
@@ -88,7 +88,7 @@ WITH CLUSTERING ORDER BY ("datetime" DESC);
 
 CREATE TABLE IF NOT EXISTS "weather"."yearly_precipitation_aggregate" (
   "city" text,
-  "datetime" int,
+  "datetime" timestamp,
   "sum_precipitation" counter,
   PRIMARY KEY ("city", "datetime")
 )
@@ -96,7 +96,7 @@ WITH CLUSTERING ORDER BY ("datetime" DESC);
 
 CREATE TABLE IF NOT EXISTS "weather"."yearly_aggregate" (
   "city" text,
-  "datetime" int,
+  "datetime" timestamp,
   "avg_pressure" double,
   "avg_temp" double,
   "temp_min" double,
