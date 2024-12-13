@@ -8,7 +8,7 @@ from time import sleep
 from pyspark.sql import SparkSession
 
 class CassandraDatabase:
-    def __init__(self, secure_connect_bundle, username=None, password=None, keyspace=None, max_retries=1):
+    def __init__(self, secure_connect_bundle, username=None, password=None, keyspace=None, max_retries=5, retry_delay=60):
         """
         Initialize the CassandraDatabase class.
         :param hosts: List of Cassandra nodes (e.g., ['cassandra'])
@@ -23,7 +23,7 @@ class CassandraDatabase:
         self.password = password
         self.keyspace = keyspace
         self.max_retries = max_retries
-        # self.retry_delay = retry_delay
+        self.retry_delay = retry_delay
         self.cluster = None
         self.session = None
         self.connect()
@@ -70,7 +70,7 @@ class CassandraDatabase:
                 retries += 1
                 if retries >= self.max_retries:
                     raise Exception("Exceeded maximum retries to connect to Cassandra")
-                # sleep(self.retry_delay)
+                sleep(self.retry_delay)
 
     def execute_query(self, query, parameters=None):
         """

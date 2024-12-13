@@ -326,6 +326,7 @@ services:
     volumes:
       - ./spark/apps:/opt/spark/apps
       - ./spark/data:/opt/spark/data
+      - ./config:/opt/spark/config
 
   spark-worker:
     image: bitnami/spark:3.4.1
@@ -341,6 +342,7 @@ services:
     volumes:
       - ./spark/apps:/opt/spark/apps
       - ./spark/data:/opt/spark/data
+      - ./config:/opt/spark/config
     depends_on:
       - spark-master
 volumes:

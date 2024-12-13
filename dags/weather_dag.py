@@ -4,41 +4,22 @@ from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 from airflow.utils.dates import timedelta
-from pyspark.sql.connect.functions import second
-
 from tasks.helpers import CassandraDatabase
-from tasks.process_data import WeatherDataProcessor
 from concurrent.futures import ThreadPoolExecutor, as_completed
-import logging
+import logging, logging.config, configparser
 import pandas as pd
 import requests
 import json
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s:%(funcName)s:%(levelname)s:%(message)s')
-logger = logging.getLogger("spark_structured_streaming")
+logger = logging.getLogger("WEATHER_DAG")
 
-DATA_FILE_PATH = '/opt/airflow/data/cities.csv'
-SECURE_CONNECT_BUNDLE = '/opt/airflow/data/secure-connect-weather-cluster.zip'
-CLUSTER_TOKEN = '/opt/airflow/data/weather_cluster-token.json'
+# Load project configuration
+config = configparser.ConfigParser()
+config.read("./config/project.cfg")
 
-API_KEYS = ['059768aecac5e0d1c2f39bf1adf42469',
-            'd4679f6c6e151ddadc48561eb6cd0d92',
-            'c27c2bc3eabb559ebdfec77fd9fc6944',
-            '249cd2594bcf61dbf230f9dfad24c921',
-            '24468a5617626f0e78a20b6138654f81',
-            '85266108076d1d2145f20b3675cfc039',
-            '5cfde48228127e5e10b26e7541572834',
-            '6d7f069fe57ff2093a58a5e0eede275c',
-            '997580b85e04d97d3b366c59134489ea',
-            'be948692ce93cd06f6c7931e6153dd2d',
-            '37dc6f9a02051f68660d0c6bae9774cb',
-            'b00ccebc4e955978507c35b7553117b8',
-            'a580de54901765e7f8a80172cb240e08']
-
-KEYSPACE = "weather"
-with open(CLUSTER_TOKEN) as f:
-    secrets = json.load(f)
+API_KEYS = json.loads(config["OPENWEATHERMAP"]["API_KEYS"])
 
 # Get city latitude, longitude
 def get_city_location(city):
@@ -52,7 +33,7 @@ def get_city_location(city):
     :rtype:
     """
     try:
-        cities = pd.read_csv(DATA_FILE_PATH)
+        cities = pd.read_csv(config["DATA"]["DATA_FILE_PATH"])
         if cities.empty:
             logging.info("No data available in the cities file.")
     except Exception as e:
@@ -130,12 +111,12 @@ def fetch_city_weather_data(city):
     return None
 
 def fetch_weather_data():
-    cities = pd.read_csv(DATA_FILE_PATH)
+    cities = pd.read_csv(config["DATA"]["DATA_FILE_PATH"])
 
     cassandra_db = CassandraDatabase(
-        secure_connect_bundle=SECURE_CONNECT_BUNDLE,
-        username=secrets["clientId"],
-        password=secrets["secret"],
+        secure_connect_bundle=config["ASTRA"]["SECURE_CONNECT_BUNDLE"],
+        username=config["ASTRA"]["ASTRA_CLIENT_ID"],
+        password=config["ASTRA"]["ASTRA_CLIENT_SECRET"],
         keyspace="weather"
     )
 
@@ -155,46 +136,11 @@ def fetch_weather_data():
             except Exception as e:
                 logging.error(f"Error processing city {city}: {e}")
 
-def process_city_weather_data(city: str):
-    """
-    Process weather data for a specific city
-    :param city: City to process
-    """
-    processor = WeatherDataProcessor(
-        app_name=f"WeatherDataAggregation_{city}",
-        master="spark://spark-master:7077",
-        secure_connect_bundle=SECURE_CONNECT_BUNDLE,
-        username=secrets["clientId"],
-        password=secrets["secret"],
-    )
-
-    try:
-        # Process daily aggregates for the city
-        processor.process_daily_aggregates(city)
-
-    except Exception as e:
-        # Log error or handle as needed
-        print(f"Error processing weather data for {city}: {str(e)}")
-
-    finally:
-        # Always close Spark session
-        processor.close()
-
-def process_weather_data():
-    cities = pd.read_csv(DATA_FILE_PATH)
-    for city in cities:
-        process_city_weather_data(city)
-
 default_args = {
     'owner': 'airflow',
     'retries': 3,
     'retry_delay': timedelta(minutes=2),
 }
-
-
-spark_master = "spark://spark-master:7077"
-spark_app_name = "Spark Hello World"
-file_path = "/opt/spark/data/test.csv"
 
 with DAG(
     f'weather_data_pipeline',
@@ -227,9 +173,11 @@ with DAG(
     #     name=spark_app_name,
     #     conn_id="spark_default",
     #     verbose=1,
-    #     conf={"spark.master":spark_master},
-    #     application_args=[file_path],
+    #     conf={
+    #         "spark.master":spark_master,
+    #         "spark.jars.packages": "com.datastax.spark:spark-cassandra-connector_2.12:3.4.1",
+    #     },
     #     dag=dag
     # )
 
-    start >> fetch_weather_data >> process_data
+    start >> fetch_weather_data
