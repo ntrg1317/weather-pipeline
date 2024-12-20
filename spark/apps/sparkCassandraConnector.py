@@ -10,7 +10,7 @@ class SparkCassandraConnect:
             secure_connect_bundle_file_path: Optional[str] = None,
             secure_connect_bundle_file: Optional[str] = None,
             username: Optional[str] = None,
-            password: Optional[str] = None
+            password: Optional[str] = None,
     ):
         """
         Initialize Spark Session with Astra Cassandra connection

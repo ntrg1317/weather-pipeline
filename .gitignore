@@ -1,0 +1,4 @@
+logs
+config/project.cfg
+spark/data/secure-connect-weather-cluster.zip
+spark/data/weather_cluster-token.json

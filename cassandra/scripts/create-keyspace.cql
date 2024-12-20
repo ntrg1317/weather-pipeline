@@ -20,8 +20,8 @@ CREATE TYPE IF NOT EXISTS "weather".wind (
 
 CREATE TABLE IF NOT EXISTS "weather"."cities" (
   "city" text,
-  "latitude" double,
-  "longitude" double,
+  "lat" double,
+  "lng" double,
   PRIMARY KEY ("city")
 );
 

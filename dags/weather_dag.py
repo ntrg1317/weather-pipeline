@@ -161,20 +161,12 @@ with DAG(
         dag=dag
     )
 
-    # process_data = PythonOperator(
-    #     task_id='process_weather_data',
-    #     python_callable=process_weather_data,
-    #     dag=dag
-    # )
-
-    # test_spark = SparkSubmitOperator(
+    # spark_transformation_job = SparkSubmitOperator(
     #     task_id="spark_job",
     #     application="/opt/spark/apps/hello.py",
-    #     name=spark_app_name,
     #     conn_id="spark_default",
     #     verbose=1,
     #     conf={
-    #         "spark.master":spark_master,
     #         "spark.jars.packages": "com.datastax.spark:spark-cassandra-connector_2.12:3.4.1",
     #     },
     #     dag=dag
