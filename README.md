@@ -5,8 +5,12 @@ This project collects weather data from cities in South East Asia using the Open
 ## Project Structure
 
 ```
-.idea/                   # IDE-specific configuration files
-cassandra/              # Cassandra-related scripts and data model on Hackolade
+cassandra/              # Cassandra-related scripts
+├── data-model          # Cassandra data modelling scripts
+├── scripts             # Query for creating keyspace "weather" on Cassandra
+
+config/                 # Configuration folders
+├── project.cfg         # Configuration variables for sensitive data
 
 dags/                   # Airflow DAGs for managing the ETL pipeline
 ├── weather_dag.py      # Main DAG for fetching and processing weather data
@@ -37,22 +41,35 @@ requirements.txt        # Python dependencies for the project
    cd weather-pipeline
    ```
 
-2. Set up the `.env` file with the required environment variables:
+2. Set up the `project.cfg` file with the required environment variables:
    ```env
-   # Example
+   [OPENWEATHERMAP]
+   API_KEYS=["key1", "key2"]
+   
+   [DATA]
+   DATA_FILE_PATH=/opt/airflow/data/cities.csv
+   
+   [ASTRA]
+   SECURE_CONNECT_BUNDLE=<your_secure_bundle>
    ASTRA_CLIENT_ID=<your_client_id>
    ASTRA_CLIENT_SECRET=<your_client_secret>
-   OPENWEATHER_API_KEYS='["key1", "key2"]'
+   ASTRA_KEYSPACE="weather"
+   
+   [SPARK]
+   SPARK_MASTER=spark://spark-master:7077
+   APP_NAME=
+
    ```
 
 3. Build and start the containers:
    ```bash
-   docker-compose up --build
+   docker composer up --build
    ```
 
 4. Access the services:
    - Airflow: [http://localhost:8080](http://localhost:8080)
-   - DataStax: Create database name weather-cluster then download bundle zip and token for env file
+   - DataStax: Create database name weather-cluster then download bundle zip and token for config file
+   - Grafana: Install plugin Astra DB on Grafana then connect to cluster
 
 ## Pipeline Workflow
 
@@ -62,11 +79,14 @@ requirements.txt        # Python dependencies for the project
 4. **Load to Cassandra**: Stores the processed data into a Cassandra table.
 5. **End Task**: Logs the completion of the pipeline.
 
-## Pipeline Diagram
+![Workflow](diagrams/workflow.png)
 
-Below is a visual representation of the ETL pipeline architecture:
+## Project Diagram
+
+Below is a visual representation of the pipeline architecture:
 
 ![Pipeline Diagram](diagrams/pipeline.png)
+
 
 ## Grafana Dashboard
 
@@ -79,3 +99,7 @@ The Grafana dashboard visualizes the following metrics:
 To configure the dashboard:
 1. Connect Grafana to your Astra database using a suitable connector.
 2. Import pre-built panels or create custom visualizations based on the stored data.
+
+Some images of the dashboard:
+![Dash1](diagrams/dash1.png)
+![Dash1](diagrams/dash2.png)
